@@ -1,32 +1,38 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { authClient } from "../lib/auth-client"; // Import the client
+import Link from 'next/link';
+
 
 export default function LoginForm() {
+  // declare constants
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    // This is where your authentication logic will live
-    try {
-      // Example: const res = await signIn('credentials', { email, password });
-      console.log("Logging in with:", email, password);
-      
-      // Simulate API delay
-      setTimeout(() => {
-        setIsLoading(false);
-        router.push('/booking'); // Redirect after success
-      }, 1500);
-    } catch (error) {
+  e.preventDefault();
+  setIsLoading(true);
+  // declare authclient object
+  const { data, error } = await authClient.signIn.email({
+    email,
+    password,
+    callbackURL: "/booking", // Where to go after success
+  }, {
+    onRequest: () => setIsLoading(true),
+    onSuccess: () => {
       setIsLoading(false);
-      alert("Invalid credentials");
+      router.push("/booking");
+    },
+    onError: (ctx) => {
+      setIsLoading(false);
+      alert(ctx.error.message); // Better Auth gives helpful error messages
     }
-  };
+  });
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black px-6">
@@ -86,7 +92,9 @@ export default function LoginForm() {
             
             <div className="flex justify-between items-center text-[10px] uppercase tracking-widest text-gray-500 font-sans">
               <button type="button" className="hover:text-white transition-colors">Forgot Password?</button>
-              <button type="button" className="hover:text-white transition-colors">Create Account</button>
+              <Link href="/register" className="hover:text-white transition-colors cursor-pointer">
+              Create Account
+              </Link>
             </div>
           </div>
         </form>
