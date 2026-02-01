@@ -17,6 +17,7 @@ const adapter = new PrismaPg(pool);
 // 3. Initialize Prisma with the adapter
 const prisma = new PrismaClient({ adapter });
 
+// betterAuth with login logic
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql",

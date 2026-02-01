@@ -15,7 +15,8 @@ export default function LoginForm() {
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setIsLoading(true);
-  // declare authclient object
+
+  // Declare authclient object sign in with email
   const { data, error } = await authClient.signIn.email({
     email,
     password,
@@ -31,7 +32,31 @@ export default function LoginForm() {
       alert(ctx.error.message); // Better Auth gives helpful error messages
     }
   });
+  // Sign in with social providers
+  await authClient.signIn.social({
+    /**
+     * The social provider ID
+     * @example "github", "google", "apple"
+     */
+    provider: "github",
+    /**
+     * A URL to redirect after the user authenticates with the provider
+     * @default "/"
+     */
+    callbackURL: "/booking", 
+    /**
+     * A URL to redirect if an error occurs during the sign in process
+     */
+    errorCallbackURL: "/error",
+    /**
+     * disable the automatic redirect to the provider. 
+     * @default false
+     */
+    disableRedirect: true,
+});
 };
+
+
 
 
   return (

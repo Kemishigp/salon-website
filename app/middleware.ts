@@ -1,21 +1,40 @@
+// import { betterFetch } from "@better-auth/fetch";
+import { auth } from "./lib/auth";
 import { NextResponse, type NextRequest } from "next/server";
-// import { getSessionCookie } from "better-auth";
-import {BetterAuthCookie} from "better-auth"
 
-export default async function middleware(request: NextRequest) {
-  // Check for the Better Auth session cookie directly
-  const sessionCookie = BetterAuthCookie(request);
+import { headers } from "next/headers";
 
-  const isBookingPage = request.nextUrl.pathname.startsWith("/booking");
+const session = await auth.api.getSession({
+    headers: await headers() // you need to pass the headers object.
+})
 
-  // If there's no cookie and they want to book, send them to login
-  if (!sessionCookie && isBookingPage) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
 
-  return NextResponse.next();
-}
 
-export const config = {
-  matcher: ["/booking/:path*"],
-};
+
+// type Session = typeof auth.$Infer.Session;
+
+// export default async function middleware(request: NextRequest) {
+//   // 1. Check for session using Better Auth's optimized fetch
+//   const { data: session } = await betterFetch<Session>(
+//     "/api/auth/get-session",
+//     {
+//       baseURL: request.nextUrl.origin,
+//       headers: {
+//         // We must pass the cookies from the request so the server knows who the user is
+//         cookie: request.headers.get("cookie") || "",
+//       },
+//     }
+//   );
+
+//   // 2. If no session exists and user is trying to access /booking
+//   if (!session && request.nextUrl.pathname.startsWith("/booking")) {
+//     return NextResponse.redirect(new URL("/login", request.url));
+//   }
+
+//   return NextResponse.next();
+// }
+
+// // 3. Only run middleware on specific routes to save performance
+// export const config = {
+//   matcher: ["/booking/:path*"],
+// };
