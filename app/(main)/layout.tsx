@@ -2,9 +2,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import "./globals.css";
-import Header from "./src/components/header";
-import Footer from "./src/components/Footer"
+import "../globals.css";
+// import Header from "../src/components/header";
+
+// import Header from "./../src/components/header";
+import Footer from "./../src/components/Footer"
+
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
@@ -45,19 +48,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>)
  {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Header/>
-      
-        {/* Inject Children into the body */}
-        {children}
-        {/* <Footer/>     */}
-      </body>
-    </html>
+return (
+    <>
+      {/* <Header /> */}
+      <main>{children}</main>
+      <Footer />
+    </>
   );
 }
-
-
