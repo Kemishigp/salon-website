@@ -31,11 +31,11 @@ export default function Header() {
         {/* Contents vs Flex spacing */}
 
           <div className='gap-8 flex justify-around text-md'>
-            <Link href="/services" className="font-medium hover:underline underline-offset-4 whitespace-nowrap  lg:text-lg">
-              Services
-            </Link>
             <Link href="/about" className="font-medium hover:underline underline-offset-4 whitespace-nowrap  lg:text-lg">
               About
+            </Link>
+            <Link href="/services" className="font-medium hover:underline underline-offset-4 whitespace-nowrap  lg:text-lg">
+              Services
             </Link>
             <Link href="/team" className="font-medium hover:underline underline-offset-4 whitespace-nowrap  lg:text-lg">
               Team
@@ -43,15 +43,15 @@ export default function Header() {
             {/* <Link href="/portfolio" className="font-medium hover:underline underline-offset-4 whitespace-nowrap    md:text-md">
               Portfolio
             </Link> */}
-            <Link href="/shop" className="font-medium hover:underline underline-offset-4 whitespace-nowrap lg:text-lg">
+            {/* <Link href="/shop" className="font-medium hover:underline underline-offset-4 whitespace-nowrap lg:text-lg">
               Shop
-            </Link>
+            </Link> */}
               <Link href="/contact" className="font-medium hover:underline underline-offset-4 whitespace-nowrap  lg:text-lg">
               Contact
             </Link>
-<Link href="/cart" className="text-white hover:opacity-70 transition flex items-center">
+{/* <Link href="/cart" className="text-white hover:opacity-70 transition flex items-center">
   <FontAwesomeIcon icon={faCartShopping} className="w-4 h-4" />
-</Link>
+</Link> */}
           </div>
         </nav>
 
