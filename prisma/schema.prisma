@@ -95,9 +95,13 @@ model TimeOff {
   reason    String?
 }
 
-// Ensure your User model has the relation:
-// model User {
-//   ... existing fields ...
-//   availability Availability[]
-//   timeOff      TimeOff[]
-// }
+model Appointment {
+  id         String   @id @default(cuid())
+  externalId String   @unique // The Cal.com ID
+  userEmail  String
+  userName   String
+  startTime  DateTime
+  endTime    DateTime
+  status     String   @default("CONFIRMED")
+  createdAt  DateTime @default(now())
+}

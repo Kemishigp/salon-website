@@ -12,7 +12,7 @@ const pool = new Pool({
 const adapter = new PrismaPg(pool);
 
 // In Prisma 7, passing the adapter is mandatory for this setup
-const prisma = new PrismaClient({ adapter });
+export const prisma = new PrismaClient({ adapter });
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
