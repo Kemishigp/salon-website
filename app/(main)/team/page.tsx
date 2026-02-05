@@ -1,6 +1,6 @@
 import React from 'react'
 // import Team from "./src/components/team"
-import Team from '../src/components/Team';
+import Team from '../../src/components/Team';
 
 
 const page = () => {
