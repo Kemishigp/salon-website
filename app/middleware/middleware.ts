@@ -1,6 +1,5 @@
 // middleware.ts
 import { NextResponse, type NextRequest } from "next/server";
-// Change from 'better-auth/next-js' to 'better-auth/cookies'
 import { getSessionCookie } from "better-auth/cookies"; 
 
 export async function middleware(request: NextRequest) {
