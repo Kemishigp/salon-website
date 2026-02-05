@@ -11,13 +11,17 @@ const pool = new Pool({
 
 const adapter = new PrismaPg(pool);
 
-// In Prisma 7, passing the adapter is mandatory for this setup
 export const prisma = new PrismaClient({ adapter });
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql",
     }),
+    trustedOrigins: [
+        "http://localhost:3000",
+        "https://salonco.netlify.app", // Replace with your actual Netlify URL
+    ],
+    baseURL: process.env.BETTER_AUTH_URL,
     emailAndPassword: { enabled: true },
     socialProviders: {
         google: {
