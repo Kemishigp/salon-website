@@ -17,3 +17,4 @@ export const config = {
     // This ensures it matches exactly "/booking" AND any sub-paths "/booking/..."
     matcher: ["/booking", "/booking/:path*"],
 };
+
