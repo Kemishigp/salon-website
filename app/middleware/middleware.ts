@@ -12,6 +12,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
 }
 
+// middleware.ts
 export const config = {
-    matcher: ["/booking/:path*"],
+    // This ensures it matches exactly "/booking" AND any sub-paths "/booking/..."
+    matcher: ["/booking", "/booking/:path*"],
 };
