@@ -58,7 +58,7 @@ export default function Header() {
 
 
         {/* <LoginLink> */}
-          <Link href='/login'>
+          <Link href='/booking'>
 
         
           <button className="cursor-pointer bg-white text-black px-14 py-4 rounded-full dark:bg-white dark:text-black hover:bg-gray-200">

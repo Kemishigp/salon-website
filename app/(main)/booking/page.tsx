@@ -1,11 +1,46 @@
-import { NextResponse, NextRequest } from 'next/server'
-import { authClient } from "@/app/lib/auth-client";
+const bookingOpt = [
+  {
+    Category: "Service",
+    Options: ["Blowout","Full Custom Blonding","Women's Cut","Hair Extensions","Highlights"]
+  },
+    {
+    Category: "Professional",
+    Options: ["Dave","Alison","Ashley","Olivia"]
+  }
+]
 
-export default async function BookingPage(request: NextRequest) {
+export default async function BookingPage() {
   return (
-    <main className="pt-30 bg-black text-white min-h-screen p-20">
-      <h1 className="font-serif text-5xl uppercase">Book Your Session</h1>
-      {/* Your scheduling logic goes here */}
-    </main>
+<main className="flex flex-col items-center pt-30 bg-black text-white min-h-screen p-20 text-center">
+  <h1 className="font-serif text-5xl uppercase mb-12">Book Your Session</h1>
+  {/* Select boxes */}
+  <div className=" md:flex-row gap-6 w-md max-w-2xl rounded-md">
+    {/* Service Select */}
+    <div className="flex flex-col flex-1 gap-2 text-left">
+      <label className="text-xs uppercase tracking-widest text-zinc-500 ml-1">Select a Service</label>
+      <select className="w-full bg-zinc-900 text-white border border-zinc-800  p-4 outline-none focus:border-white transition-colors appearance-none">
+        <option value="" disabled selected>Select...</option>
+        {bookingOpt[0].Options.map((option) => (
+          <option key={option} value={option}>{option}</option>
+        ))}
+      </select>
+    </div>
+    <h1 className="font-serif text-xl py-5 uppercase">or</h1>
+    {/* Professional Select */}
+    <div className="flex flex-col flex-1 gap-2 text-left">
+      <label className="text-xs uppercase tracking-widest text-zinc-500 ml-1">Select a Professional</label>
+      <select className="w-full bg-zinc-900 text-white border border-zinc-800  p-4 outline-none focus:border-white transition-colors appearance-none">
+        <option value="" disabled selected>Select...</option>
+        {bookingOpt[1].Options.map((option) => (
+          <option key={option} value={option}>{option}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+</main>
   );
 }
+
+// List display with services and Specialist
+// Calendar, dates and times available
+// 

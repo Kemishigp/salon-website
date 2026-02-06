@@ -6,6 +6,7 @@
 // - Book Now
 
 import React from 'react'
+import Link from 'next/link'
 
 const stylists = [
   {
@@ -36,7 +37,7 @@ const stylists = [
 
 const Team = () => {
   return (
-    <section className="bg-gray-900 text-white py-12 px-8">
+    <section className=" bg-gray-900 text-white py-12 pb-30 px-8">
       <div className="text-center ">
         <h2 className="font-serif text-5xl mb-4">Meet Our Team</h2>
         <p className="font-light pb-4 tracking-widest uppercase text-xs text-white/60">The hands behind the art</p>
@@ -64,9 +65,11 @@ const Team = () => {
             </p>
 
             {/* 4. Small Action Link */}
+            <Link href ='/booking'>
             <button className="mt-auto text-left text-xs font-bold uppercase tracking-widest border-b border-white/20 pb-2 w-fit hover:border-white transition-colors">
               Book with {stylist.name}
             </button>
+            </Link>
           </div>
         ))}
 
@@ -76,30 +79,3 @@ const Team = () => {
 }
 
 export default Team
-
-// const Team = () => {
-//   return (
-//     <section className=' max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-white bg-black h-screen w-full layout-grid'>
-//         <div className=" "></div>
-//         <div>
-//             <img src = "/team2.jpeg" alt="Alison"></img>
-//             Alison
-//         </div>
-//         <div>
-//             <img src = "/team1.jpeg" alt="Dave"></img>
-//             Dave
-//         </div>
-//         <div>
-//             <img src = "/team3.jpg" alt="Ashley"></img>
-//             Ashley
-//         </div>
-//         <div>
-//             Olivia
-//             <img src = "/team4.jpeg" alt="Olivia"></img>
-//         </div>
-//     </section>
-
-//   )
-// }
-
-// export default Team
