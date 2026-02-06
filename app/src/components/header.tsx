@@ -24,7 +24,7 @@ export default function Header() {
     <header className="fixed w-full flex font-semibold text-md justify-center font-serif z-50">
       {/* Desktop Version */}
       {/* Pill - Full header verions logic */}
-        <div className={`hidden md:flex left-0  flex bg-black/90 backdrop-blur-md py-4 flex items-center justify-between gap-10 border border-white/10 shadow-2xl text-white ${containerStyles}`}>
+        <div className={`hidden md:flex left-0  flex bg-black backdrop-blur-md py-4 flex items-center justify-between gap-10 border border-white/10 shadow-2xl text-white ${containerStyles}`}>
           <Link href='/' className={`${isHomePage ? 'hidden': 'text-white text-2xl text-bold'}`}>Salon and Co.</Link>
         <nav className={`left-0 ${isHomePage ? 'contents' : 'flex flex-1 justify-around'}`}>
           {/* Hide logo on homepage */}
@@ -93,7 +93,7 @@ export default function Header() {
           <Link href="/about" onClick={() => setIsOpen(false)} className="font-serif text-2xl">About</Link>
           <Link href="/team" onClick={() => setIsOpen(false)} className="font-serif text-2xl">Team</Link>
           <Link href="/team" onClick={() => setIsOpen(false)} className="font-serif text-2xl">Contact</Link>
-          <button className="bg-white text-black px-8 py-2 rounded-full font-bold">Book Now</button>
+          <button className="cursor-pointer bg-white text-black px-8 py-2 rounded-full font-bold">Book Now</button>
         </div>
   </div>
     </header>

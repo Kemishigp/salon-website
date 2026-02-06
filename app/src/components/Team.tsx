@@ -1,10 +1,3 @@
-// Meet our team
-// Grid layout pics
-// - Pic
-// - Stylist name
-// - Stylist description
-// - Book Now
-
 import React from 'react'
 import Link from 'next/link'
 
@@ -44,7 +37,7 @@ const Team = () => {
       </div>
 
       {/* 1. The Grid Container */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-md md:max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         
         {stylists.map((stylist, index) => (
           <div key={index} className="flex flex-col group">

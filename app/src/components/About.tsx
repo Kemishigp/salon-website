@@ -7,7 +7,7 @@ const About = () => {
       {/* Story Section */}
       <section className='mb-24'>
         <h1 className='text-4xl md:text-5xl mb-10 tracking-widest uppercase'>About Us</h1>
-        <p className='text-lg md:text-xl leading-relaxed font-light opacity-90 font-sans'>
+        <p className='text-lg md:text-xl leading-relaxed font-light opacity-90 font-sans px-40'>
           Hey there! Welcome to cozy luxury🤍 We specialize in Beaded Weft Extensions 
           (hand tied extensions), Blonding and specialty colors! We are an extensively 
           trained luxury salon and have learned some of the most cutting edge techniques! 

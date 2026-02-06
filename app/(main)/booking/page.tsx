@@ -1,17 +1,17 @@
 const bookingOpt = [
   {
     Category: "Service",
-    Options: ["Blowout","Full Custom Blonding","Women's Cut","Hair Extensions","Highlights"]
+    Options: [,"Blowout","Full Custom Blonding","Women's Cut","Hair Extensions","Highlights"]
   },
     {
     Category: "Professional",
-    Options: ["Dave","Alison","Ashley","Olivia"]
+    Options: ["Any Professional","Dave","Alison","Ashley","Olivia"]
   }
 ]
 
 export default async function BookingPage() {
   return (
-<main className="flex flex-col items-center pt-30 bg-black text-white min-h-screen p-20 text-center">
+<main className="flex flex-col items-center pt-30 bg-black/90 text-white min-h-screen p-20 text-center">
   <h1 className="font-serif text-5xl uppercase mb-12">Book Your Session</h1>
   {/* Select boxes */}
   <div className=" md:flex-row gap-6 w-md max-w-2xl rounded-md">
@@ -37,6 +37,9 @@ export default async function BookingPage() {
       </select>
     </div>
   </div>
+    <button type="button" className="flex bg-zinc-810 py-2 px-6 mt-4 rounded-full font-sans font-bold border-white border hover:bg-white hover:text-black hover:pointer cursor-pointer">
+     - Next -
+    </button>
 </main>
   );
 }
