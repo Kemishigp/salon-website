@@ -71,7 +71,7 @@ model Verification {
   @@map("verification")
 }
 
-// Add this to your existing schema.prisma
+// Add to the existing schema.prisma
 
 model Availability {
   id     String @id @default(cuid())

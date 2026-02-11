@@ -28,7 +28,7 @@ export default function Footer() {
           <div className="text-center md:text-left space-y-4">
             <h3 className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Visit Us</h3>
             <p className="text-sm leading-relaxed">
-              123 Luxury Lane, Suite 100<br />
+              123 Stylist Lane, Suite 100<br />
               Beverly Hills, CA 90210
             </p>
           </div>

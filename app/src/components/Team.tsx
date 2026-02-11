@@ -6,7 +6,7 @@ const stylists = [
     name: "Dave",
     role: "Master Colorist",
     desc: "Specializing in balayage and lived-in blonde techniques with 10 years of artistry.",
-    image: "/team1.jpeg" // Put these in your public folder
+    image: "/team1.jpeg" 
   },
   {
     name: "Alison",
