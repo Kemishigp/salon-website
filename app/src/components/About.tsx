@@ -2,12 +2,11 @@ import React from 'react'
 
 const About = () => {
   return (
-    // <div className='bg-black text-white px-6 py-20  mx-auto text-center font-serif'>
-      <div className='bg-black text-white px-6 pb-20 pt-5 mx-auto text-center font-serif'>
+      <div className='bg-black/90 text-white px-6 pb-20 pt-5 mx-auto text-center font-serif'>
       {/* Story Section */}
       <section className='mb-24'>
         <h1 className='text-4xl md:text-5xl mb-10 tracking-widest uppercase'>About Us</h1>
-        <p className='text-lg md:text-xl leading-relaxed font-light opacity-90 font-sans px-40'>
+        <p className='text-lg md:text-xl leading-relaxed font-light font-sans px-40'>
           Hey there! Welcome to cozy luxury🤍 We specialize in Beaded Weft Extensions 
           (hand tied extensions), Blonding and specialty colors! We are an extensively 
           trained luxury salon and have learned some of the most cutting edge techniques! 

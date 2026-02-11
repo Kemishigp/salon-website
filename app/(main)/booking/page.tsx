@@ -1,3 +1,5 @@
+
+import Link from "next/link"
 const bookingOpt = [
   {
     Category: "Service",
@@ -18,7 +20,7 @@ export default async function BookingPage() {
     {/* Service Select */}
     <div className="flex flex-col flex-1 gap-2 text-left">
       <label className="text-xs uppercase tracking-widest text-zinc-500 ml-1">Select a Service</label>
-      <select className="w-full bg-zinc-900 text-white border border-zinc-800  p-4 outline-none focus:border-white transition-colors appearance-none">
+      <select className="w-full bg-black text-white border border-zinc-800  p-4 outline-none focus:border-white transition-colors appearance-none">
         <option value="" disabled selected>Select...</option>
         {bookingOpt[0].Options.map((option) => (
           <option key={option} value={option}>{option}</option>
@@ -29,7 +31,7 @@ export default async function BookingPage() {
     {/* Professional Select */}
     <div className="flex flex-col flex-1 gap-2 text-left">
       <label className="text-xs uppercase tracking-widest text-zinc-500 ml-1">Select a Professional</label>
-      <select className="w-full bg-zinc-900 text-white border border-zinc-800  p-4 outline-none focus:border-white transition-colors appearance-none">
+      <select className="w-full bg-black text-white border border-zinc-800  p-4 outline-none focus:border-white transition-colors appearance-none">
         <option value="" disabled selected>Select...</option>
         {bookingOpt[1].Options.map((option) => (
           <option key={option} value={option}>{option}</option>
@@ -37,9 +39,11 @@ export default async function BookingPage() {
       </select>
     </div>
   </div>
+  <Link href="/booking/schedule">
     <button type="button" className="flex bg-zinc-810 py-2 px-6 mt-4 rounded-full font-sans font-bold border-white border hover:bg-white hover:text-black hover:pointer cursor-pointer">
      - Next -
     </button>
+  </Link>
 </main>
   );
 }

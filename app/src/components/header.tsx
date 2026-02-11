@@ -4,11 +4,6 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { usePathname } from 'next/navigation'; // Import the hook
-import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
-
-
-
-
 
 export default function Header() {
   const pathname = usePathname();
