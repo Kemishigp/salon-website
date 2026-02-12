@@ -1,12 +1,11 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Calendar = () => {
   const months = ["January", "February", "March", "April", "May", "June", "July",
                   "August", "September", "October", "November", "December"];
-  
   const [currDate, setCurrDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [availability, setAvailability] = useState<any>(null);
@@ -16,9 +15,10 @@ const Calendar = () => {
   // 
 useEffect(() => {
   const getSlots = async () => {
-    // We pad the month to ensure it matches the API expectations
+    // Pad the month to ensure it matches the API expectations
     const paddedMonth = String(currMonth + 1).padStart(2, '0');
     try {
+      // Call the api route
       const res = await fetch(`/api/availability?month=${paddedMonth}&year=${currYear}`);
       const data = await res.json();
       
@@ -121,7 +121,8 @@ const res = await fetch('/api/book', {
 };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-black p-4 font-sans text-white">
+    <div className="bg-black/90 flex pt-20 flex-col min-h-screen w-full items-center justify-center bg-black p-4 font-sans text-white">
+      <h1 className='flex text-5xl p-10 font-serif uppercase'>Select a Date & Time</h1>
       <div className="w-full max-w-md bg-zinc-950 p-6 rounded-3xl border border-zinc-800 shadow-2xl">
         <header className="flex items-center justify-between mb-8 px-2">
           <p className="font-bold text-2xl">{months[currMonth]} {currYear}</p>

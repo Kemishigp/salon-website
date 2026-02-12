@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { auth } from "../../lib/auth"; 
+import { auth, prisma } from "../../lib/auth"; 
 import { headers } from "next/headers";
 
 export async function POST(request: Request) {
@@ -8,32 +8,50 @@ export async function POST(request: Request) {
   });
 
   if (!session || !session.user) {
-    return NextResponse.json(
-      { success: false, error: "You must be logged in to book" }, 
-      { status: 401 }
-    );
+    return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
-  const { start } = body; 
-
-  const apiKey = process.env.CAL_API;
-  const eventTypeId = 4717703; 
+  const userEmail = session.user.email;
+  const now = new Date();
 
   try {
-const response = await fetch(`https://api.cal.com/v1/bookings?apiKey=${apiKey}`, {
+    // 1. Check for active (future) appointments in your Appointment model
+    const activeAppointmentCount = await prisma.appointment.count({
+      where: {
+        userEmail: userEmail,
+        startTime: {
+          gt: now, // Greater than now = future/active
+        },
+        status: "CONFIRMED", // Matches your default status
+      },
+    });
+
+    if (activeAppointmentCount >= 2) {
+      return NextResponse.json({ 
+        success: false, 
+        error: "You already have 2 upcoming appointments. Please complete or cancel one before booking again." 
+      }, { status: 403 });
+    }
+
+    const body = await request.json();
+    const { start } = body;
+
+    // 2. Call Cal.com API (V2)
+    const response = await fetch(`https://api.cal.com/v2/bookings`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Authorization': `Bearer ${process.env.CAL_API}`,
+        'Content-Type': 'application/json' 
+      },
       body: JSON.stringify({
-        eventTypeId: eventTypeId,
+        eventTypeId: 4717703,
         start: start,
         timeZone: "UTC",
         language: "en",
         metadata: {},
         responses: {
-          name: session.user.name,  
-          email: session.user.email, 
-          notes: "" 
+          name: session.user.name,
+          email: userEmail,
         }
       }),
     });
@@ -41,13 +59,25 @@ const response = await fetch(`https://api.cal.com/v1/bookings?apiKey=${apiKey}`,
     const data = await response.json();
 
     if (response.ok) {
+      // 3. Save to your Appointment table using your schema fields
+      await prisma.appointment.create({
+        data: {
+          externalId: String(data.data.id), // Storing Cal.com ID
+          userEmail: userEmail,
+          userName: session.user.name || "Guest",
+          startTime: new Date(start),
+          // Cal.com V2 usually returns end time, or you can estimate +30/60 mins
+          endTime: new Date(new Date(start).getTime() + 60 * 60 * 1000), 
+          status: "CONFIRMED"
+        }
+      });
+
       return NextResponse.json({ success: true, data });
     } else {
-      // Log the full error to the terminal so you can see if anything else is missing
-      console.error("Cal.com API Error:", data);
-      return NextResponse.json({ success: false, error: data.message || "API Error" }, { status: 400 });
+      return NextResponse.json({ success: false, error: data.message }, { status: 400 });
     }
   } catch (error) {
-    return NextResponse.json({ success: false, error: "Booking failed" }, { status: 500 });
+    console.error("Booking Logic Error:", error);
+    return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
   }
 }
