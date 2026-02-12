@@ -20,9 +20,11 @@ export async function POST(request: Request) {
       where: {
         userEmail: userEmail,
         startTime: {
-          gt: now, // Greater than now = future/active
+          // Greater than now = future/active
+          gt: now, 
         },
-        status: "CONFIRMED", // Matches your default status
+        // Matches your default status
+        status: "CONFIRMED", 
       },
     });
 

@@ -22,7 +22,7 @@ useEffect(() => {
       const res = await fetch(`/api/availability?month=${paddedMonth}&year=${currYear}`);
       const data = await res.json();
       
-      console.log("Frontend received slots:", data); // Check the browser console!
+      console.log("Frontend received slots:", data);
       setAvailability(data); 
     } catch (error) {
       console.error("Error fetching slots:", error);

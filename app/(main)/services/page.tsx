@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link"
 
 interface ServiceProps {
   image: string;
@@ -22,9 +23,11 @@ const ServiceCard = ({ image, title, price, duration, description }: ServiceProp
       <h3 className="text-2xl font-serif uppercase tracking-widest leading-tight max-w-[70%] text-white">
         {title}
       </h3>
+      <Link href="/booking">
       <button className="border border-white/40 px-8 py-2 rounded-full text-[10px] uppercase tracking-widest text-white hover:bg-white hover:text-black transition-colors">
         Select
       </button>
+      </Link>
     </div>
 
     <div className="space-y-4">
