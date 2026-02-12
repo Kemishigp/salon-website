@@ -1,4 +1,5 @@
 import React from 'react'
+import { FadeIn } from './animations/FadeIn'
 
 const Hero = () => {
   return (
@@ -14,6 +15,8 @@ const Hero = () => {
       </div>
 
       {/* 3. The Text Content */}
+      <FadeIn delay={0.3}>
+
       <div className="relative z-10 text-center px-4 This centers the text">
         <h1 className="font-serif text-6xl md:text-8xl text-white tracking-tighter drop-shadow-2xl Stylizes the h1">
           Salon and co.
@@ -23,6 +26,7 @@ const Hero = () => {
           Artistry • Luxury • Precision
         </p>
       </div>
+      </FadeIn>
     </section>
   )
 }
