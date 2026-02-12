@@ -1,3 +1,5 @@
+// api/route.ts
+// Make an API call to cal.com to check for availabilities
 import { NextResponse } from 'next/server';
 
 

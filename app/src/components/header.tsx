@@ -17,7 +17,7 @@ export default function Header() {
     : "top-0 w-full border-b border-white/10 px-6";   // Rectangle
 
   return (
-    <FadeIn delay={0.1}>
+    <FadeIn>
 
     <header className="fixed w-full flex font-semibold text-md justify-center font-serif z-50">
       {/* Desktop Version */}
@@ -61,8 +61,6 @@ export default function Header() {
         {/* </FadeIn> */}
 
 {/* Mobile version */}
-{/* <FadeIn delay={10}> */}
-
     <div className="md:hidden w-full relative z-[100] bg-black text-white flex justify-between px-4 py-4">
       <Link href="/" className="text-xl font-bold z-[60]">S&C</Link>
       <div className='flex gap-2'>
@@ -81,7 +79,9 @@ export default function Header() {
           <Link href="/about" onClick={() => setIsOpen(false)} className="font-serif text-2xl">About</Link>
           <Link href="/team" onClick={() => setIsOpen(false)} className="font-serif text-2xl">Team</Link>
           <Link href="/team" onClick={() => setIsOpen(false)} className="font-serif text-2xl">Contact</Link>
+                    <Link href='/booking' onClick={() => setIsOpen(false)}>
           <button className="cursor-pointer bg-white text-black px-8 py-2 rounded-full font-bold">Book Now</button>
+                    </Link>      
         </div>
   </div>
     </header>

@@ -60,19 +60,30 @@ export default function BookingPage() {
       </div>
 
       {/* Only allow clicking Next if a service is selected */}
-      <Link href={selectedService ? nextUrl : "#"}>
-        <button 
-          type="button" 
-          disabled={!selectedService}
-          className={`flex py-2 px-10 mt-12 rounded-full font-sans font-bold border border-white transition-all
-            ${selectedService 
-              ? "bg-transparent hover:bg-white hover:text-black cursor-pointer" 
-              : "opacity-30 cursor-not-allowed"}
-          `}
-        >
-          - Next -
-        </button>
-      </Link>
+{/* 1. Wrap both buttons in a flex container */}
+<div className="flex flex-col items-center gap-6 mt-12"> 
+  
+  <Link href={selectedService ? nextUrl : "#"}>
+    <button 
+      type="button" 
+      disabled={!selectedService}
+      className={`flex py-2 px-10 rounded-full font-sans font-bold border border-white transition-all
+        ${selectedService 
+          ? "bg-transparent hover:bg-white hover:text-black cursor-pointer" 
+          : "opacity-30 cursor-not-allowed"}
+      `}
+    >
+      - Next -
+    </button>
+  </Link>
+
+  <Link href="booking/my-bookings">
+    <button className=" px-6 py-2 rounded-md font-serif cursor-pointer text-white">
+      Manage Appointments
+    </button>
+  </Link>
+  
+</div>
     </main>
   );
 }

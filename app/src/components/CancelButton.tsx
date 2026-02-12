@@ -8,7 +8,7 @@ export default function CancelButton({ bookingId }: { bookingId: string }) {
     if (!confirm("Are you sure you want to cancel this appointment?")) return;
     setLoading(true);
     
-    await fetch("/api/bookings/cancel", {
+    await fetch("/api/cancel", {
       method: "DELETE",
       body: JSON.stringify({ bookingId }),
     });

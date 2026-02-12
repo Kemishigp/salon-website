@@ -1,3 +1,5 @@
+// api/book/route.ts
+// Create a booking
 import { NextResponse } from 'next/server';
 import { auth, prisma } from "../../lib/auth"; 
 import { headers } from "next/headers";
@@ -10,8 +12,13 @@ export async function POST(request: Request) {
   if (!session || !session.user) {
     return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
   }
-
+  const { searchParams } = new URL(request.url);
+  const service = searchParams.get('service') ?? "General Service";
+  const pro = searchParams.get('pro') ?? "Any";
+  console.log("Service received from URL:", service);
   const userEmail = session.user.email;
+    console.log("Stylist received from URL:", pro);
+
   const now = new Date();
 
   try {
@@ -58,21 +65,24 @@ export async function POST(request: Request) {
       }),
     });
 
-    const data = await response.json();
+// Inside your POST /api/book route
+const data = await response.json();
 
-    if (response.ok) {
-      // 3. Save to your Appointment table using your schema fields
-      await prisma.appointment.create({
-        data: {
-          externalId: String(data.data.id), // Storing Cal.com ID
-          userEmail: userEmail,
-          userName: session.user.name || "Guest",
-          startTime: new Date(start),
-          // Cal.com V2 usually returns end time, or you can estimate +30/60 mins
-          endTime: new Date(new Date(start).getTime() + 60 * 60 * 1000), 
-          status: "CONFIRMED"
-        }
-      });
+if (response.ok) {
+  const calUid = data.data.uid;
+  await prisma.appointment.create({
+    data: {
+      // CHANGE THIS: Save data.data.uid instead of data.data.id
+      externalId: String(calUid), 
+      userEmail: userEmail,
+      userName: session.user.name || "Guest",
+      startTime: new Date(start),
+      Service: service,
+      Stylist: pro,
+      endTime: new Date(new Date(start).getTime() + 60 * 60 * 1000), 
+      status: "CONFIRMED"
+    }
+  });
 
       return NextResponse.json({ success: true, data });
     } else {

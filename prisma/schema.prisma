@@ -92,6 +92,8 @@ model Appointment {
   userName   String
   startTime  DateTime
   endTime    DateTime
+  Stylist    String   @default("Any")
+  Service    String   @default("Empty")
   status     String   @default("CONFIRMED")
   createdAt  DateTime @default(now())
 }

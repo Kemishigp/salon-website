@@ -1,9 +1,14 @@
+// booking/schedule/page.tsx
 "use client";
+import { useRouter } from 'next/navigation'; // Use 'next/router' if using Pages router
+
+
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Calendar = () => {
+  const router = useRouter();
   const months = ["January", "February", "March", "April", "May", "June", "July",
                   "August", "September", "October", "November", "December"];
   const [currDate, setCurrDate] = useState(new Date());
@@ -12,7 +17,6 @@ const Calendar = () => {
 
   const currYear = currDate.getFullYear();
   const currMonth = currDate.getMonth();
-  // 
 useEffect(() => {
   const getSlots = async () => {
     // Pad the month to ensure it matches the API expectations
@@ -30,6 +34,13 @@ useEffect(() => {
   };
   getSlots();
 }, [currMonth, currYear]);
+const handleSlotClick = async (time: string) => {
+  // 1. Run your booking logic
+  await handleBooking(time);
+  
+  // 2. Navigate manually after the booking is processed
+  router.push('/booking/my-bookings');
+};
 
   const changeMonth = (direction: 'prev' | 'next') => {
     setSelectedDay(null);
@@ -90,13 +101,16 @@ const handleBooking = async (slotTime: string) => {
   // The backend grabs name/email from the Better-Auth session.
   
   try {
-const res = await fetch('/api/book', {
+    const params = new URLSearchParams(window.location.search);
+    const serviceName = params.get('service') || "General Service";
+    const stylist = params.get('pro') || "Any";
+    const res = await fetch(`/api/book?service=${encodeURIComponent(serviceName)}&pro=${encodeURIComponent(stylist)}`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    start: slotTime, // Ensure this is the full string: "2026-02-14T10:00:00Z"
+    start: slotTime, 
   }),
 });
 
@@ -144,7 +158,7 @@ const res = await fetch('/api/book', {
     {availability[selectedDateString!].map((slot: any) => (
 <button 
   key={slot.time}
-  onClick={() => handleBooking(slot.time)}
+  onClick={() => handleSlotClick(slot.time)}
   className="bg-zinc-100 hover:bg-white text-black text-xs font-bold py-2 rounded-lg transition-colors"
 >
   {new Date(slot.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
