@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from "next/link"
+import {FadeIn} from "../../src/components/animations/FadeIn";
+import {BringUp} from "../../src/components/animations/BringUp";
 
 interface ServiceProps {
   image: string;
@@ -23,11 +24,9 @@ const ServiceCard = ({ image, title, price, duration, description }: ServiceProp
       <h3 className="text-2xl font-serif uppercase tracking-widest leading-tight max-w-[70%] text-white">
         {title}
       </h3>
-      <Link href="/booking">
       <button className="border border-white/40 px-8 py-2 rounded-full text-[10px] uppercase tracking-widest text-white hover:bg-white hover:text-black transition-colors">
         Select
       </button>
-      </Link>
     </div>
 
     <div className="space-y-4">
@@ -49,52 +48,53 @@ const ServiceCard = ({ image, title, price, duration, description }: ServiceProp
   </div>
 );
 
-// 2. Keep this as the ONLY default export
 export default function ServicesPage() {
   return (
     <main className="bg-black text-white min-h-screen pt-32 px-6 lg:px-16 pb-20">
+      <FadeIn>
       <h1 className="text-6xl md:text-8xl font-serif uppercase mb-12 tracking-tighter">
         Services
       </h1>
-
-
-
+      </FadeIn>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
-        <ServiceCard 
+
+
+
+        <BringUp delay={0.3}> <ServiceCard 
           image="/blowout.jpg"
           title="Blowout"
           price="65"
           duration="60"
           description="Come and get your hair washed and styled so you don't have to!"
-        />
-        <ServiceCard 
+          /> </BringUp>
+          <BringUp delay={0.3}> <ServiceCard 
           image="/custom-blonding.webp"
           title="Full Custom Blonding"
           price="320"
           duration="270"
           description="This is for anyone wanting to be primarily blonde throughout the whole head! Any tones can be chosen. This package includes everything but a cut."
-        />
-          <ServiceCard 
+          /> </BringUp>
+          <BringUp delay={0.3}> <ServiceCard 
           image="/cuts.jpeg"
           title="Women's cut"
           price="65"
           duration="75"
           description=""
-        />        
-        <ServiceCard 
+          /> </BringUp>
+          <BringUp delay={0.3}> <ServiceCard 
           image="/extensions.webp"
           title="Hair Extensions"
           price="1450"
           duration="150"
           description="This is 2 beaded weft extensions! You should be able to fullness AND length from this service"
-        />              
-        <ServiceCard 
+          /> </BringUp>
+          <BringUp delay={0.3}> <ServiceCard 
           image="/highlights.jpeg"
           title="highlights"
           price="285"
           duration="210"
           description=""
-        />
+          /> </BringUp>
       </div>
     </main>
   );
